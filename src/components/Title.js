@@ -1,14 +1,14 @@
 import React from 'react';
 
-class View extends React.Component {
+class Title extends React.Component {
     state = {  }
     render() {
         return (
-        <div>
-            </div>
+
+            <div></div>
             
         );
     }
 }
 
-export default View;
+export default Title;

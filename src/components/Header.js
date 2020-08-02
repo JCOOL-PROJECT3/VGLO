@@ -1,4 +1,5 @@
 import React from 'react';
+import { findRenderedComponentWithType } from 'react-dom/test-utils';
 
 function Header() {
     const headerStyle = {
@@ -13,8 +14,12 @@ function Header() {
         fontSize: "20px",
     }
 
+    const linkStyle = {
+        color: "white",
+    }
+
     return (
-        <div style={headerStyle}>Video Game Library Organizer<p style={stStyle}>Powered by RAWG.io</p></div>
+        <div style={headerStyle}>Video Game Library Organizer<p style={stStyle}>Powered by <a style={linkStyle} href="http://rawg.io">RAWG.io</a></p></div>
     );
 }
 
