@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-class View extends React.Component {
-    state = {  }
+class View extends Component {
+    state = {   }
+
     render() {
         return (
         <div>

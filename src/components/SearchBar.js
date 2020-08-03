@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Title from './Title';
 import View from './View';
 
@@ -28,7 +28,7 @@ const editStyle = {
 
 
 
-class SearchBar extends React.Component {
+class SearchBar extends Component {
 
     state = {
         myValue: '',
@@ -41,7 +41,7 @@ class SearchBar extends React.Component {
         const data = { searchFor: this.state.myValue };
 
         fetch('api/search', {
-            method: 'POST', // or 'PUT'
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -50,9 +50,7 @@ class SearchBar extends React.Component {
             .then(response => response.json())
             .then(data => {
                 this.setState({ dataArray: data.results });
-                data.results.forEach(e => {
-                    console.log(e.name);
-                });
+                console.log(data.results);
             })
             .catch((error) => {
                 console.error('Error:', error);
@@ -62,6 +60,20 @@ class SearchBar extends React.Component {
     handleChange = (e) => this.setState({
         myValue: e.target.value,
     });
+
+    renderView = () => {
+        if (this.state.dataArray.length > 0) {
+            return this.state.dataArray.map((data) => 
+                <Title image={data.background_image} name={data.name} platforms={data.platforms} />
+            )
+        } else {
+            return (
+                <h1>Nope</h1>
+            )
+        }
+    }
+
+
 
     render() {
 
@@ -74,7 +86,7 @@ class SearchBar extends React.Component {
                 </label>
                 <input onClick={this.btnClick} style={btnStyle} type="submit" value="Search" />
             </form>
-            <View gamesObj={this.state.dataArray} />
+            {this.renderView()}
             </div>
         );
     }
