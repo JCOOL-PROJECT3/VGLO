@@ -68,7 +68,7 @@ class SearchBar extends Component {
             )
         } else {
             return (
-                <h1>Nope</h1>
+                <h1></h1>
             )
         }
     }

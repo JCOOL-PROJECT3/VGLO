@@ -41,17 +41,36 @@ const labelStyle = {
 }
 
 class Title extends React.Component {
-    state = {  }
+    state = { selectValue: this.props.platforms[0].platform.name }
+
+    selectChange = (e) => {
+
+        this.setState({selectValue: e.target.value});
+        
+        
+    }
 
     btnClick = (e) => {
         e.preventDefault();
-        this.props.platforms.forEach((e) => {console.log(e.platform.name)});
+        alert(this.state.selectValue);
+        
     }
     render() {
         return (
 
             <div style={titleStyle}>
-                <div style={headerStyle}>{this.props.name}<label style={labelStyle}>Platform:</label><select style={selectStyle}></select><button onClick={this.btnClick}>Add to Collection</button></div>
+                <div style={headerStyle}>{this.props.name}<label style={labelStyle}>Platform:</label>
+                <select onChange={this.selectChange} style={selectStyle}>
+      {this.props.platforms.map(item => (
+        <option
+          key={item.platform.name}
+          value={item.platform.name}
+        >
+            {item.platform.name}
+        </option>
+      ))}
+    </select>
+                <button onClick={this.btnClick}>Add to Collection</button></div>
                 <img style={imgStyle} src={this.props.image}></img>
             </div>
             

@@ -1,5 +1,6 @@
 import React from 'react';
 import { findRenderedComponentWithType } from 'react-dom/test-utils';
+import Login from './Login';
 
 function Header() {
     const headerStyle = {

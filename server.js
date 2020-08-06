@@ -16,4 +16,8 @@ app.post('/api/search', jsonParser, (req, res) => {
     });
 })
 
+app.post('/auth/login', jsonParser, (req, res) => {
+    console.log(req.body);
+});
+
 app.listen(port, () => console.log(`Server listening at http://localhost:${port}`))
