@@ -1,4 +1,4 @@
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://joe:ScatPack2020!@ds053838.mlab.com:53838/heroku_pndrw9z9";
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://user:password@ds053838.mlab.com:53838/heroku_pndrw9z9";
 
 const express = require('express')
 var bodyParser = require('body-parser');
