@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Title from './Title';
-import View from './View';
+import Login from './Login';
+import {Container, Row, Col} from 'react-bootstrap';
+import Owned from './Owned';
 
 const formStyle = {
     backgroundColor: "grey",
@@ -30,15 +32,21 @@ const editStyle = {
 
 class SearchBar extends Component {
 
+   
+
     state = {
         myValue: '',
         dataArray: [],
+        mode: false,
     }
 
     btnClick = (e) => {
         e.preventDefault();
+        this.setState({ mode: true });
+        this.props.updateMode(false);
 
         const data = { searchFor: this.state.myValue };
+
 
         fetch('api/search', {
             method: 'POST',
@@ -61,34 +69,52 @@ class SearchBar extends Component {
         myValue: e.target.value,
     });
 
-    renderView = () => {
-        if (this.state.dataArray.length > 0) {
-            return this.state.dataArray.map((data) => 
-                <Title image={data.background_image} name={data.name} platforms={data.platforms} />
-            )
-        } else {
-            return (
-                <h1></h1>
-            )
-        }
+    changeMode = (mode) => {
+        this.setState({mode: mode});
     }
 
+    renderSearch = () => {
+        
+        if (this.state.dataArray.length > 0) {
+                return this.state.dataArray.map((data) =>
+                    <Title authUser={this.props.authUser} image={data.background_image} name={data.name} platforms={data.platforms} />
+                )
+            }
+        }
 
+    renderCollection = () => {
+        
+        return this.props.collection.map((data) =>
+            <Owned title={data.title} image={data.image} />
+        )
+
+    }
+
+    renderView = () => {
+        console.log(`'search: ${this.state.mode} collection: ${this.props.viewCollectionMode}`);
+}
 
     render() {
 
+
+
         return (
             <div>
-            <form autoComplete="off" style={formStyle}>
-                <label>
-                    Search For Title:
+                <form autoComplete="off" style={formStyle}>
+                    <label>
+                        Search For Title:
         <input value={this.state.myValue} onChange={this.handleChange} style={editStyle} type="text" name="title" />
-                </label>
-                <input onClick={this.btnClick} style={btnStyle} type="submit" value="Search" />
-            </form>
-            {this.renderView()}
+                    </label>
+                    <input onClick={this.btnClick} style={btnStyle} type="submit" value="Search" />
+                </form>
+                {this.props.viewCollectionMode ? this.renderCollection() : this.renderSearch()}
+                
+                
             </div>
         );
+
+
+
     }
 
 

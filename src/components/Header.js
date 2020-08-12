@@ -20,7 +20,7 @@ function Header() {
     }
 
     return (
-        <div style={headerStyle}>Video Game Library Organizer<p style={stStyle}>Powered by <a style={linkStyle} href="http://rawg.io">RAWG.io</a></p></div>
+        <div style={headerStyle}>Video Game Library Organizer<p style={stStyle}>Powered by <a target="_blank" style={linkStyle} href="http://rawg.io">RAWG.io</a></p></div>
     );
 }
 

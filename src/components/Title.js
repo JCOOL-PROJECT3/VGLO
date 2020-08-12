@@ -41,7 +41,9 @@ const labelStyle = {
 }
 
 class Title extends React.Component {
-    state = { selectValue: this.props.platforms[0].platform.name }
+    state = { 
+        selectValue: this.props.platforms[0].platform.name,
+     }
 
     selectChange = (e) => {
 
@@ -50,9 +52,33 @@ class Title extends React.Component {
         
     }
 
+    // add game to collection
+
     btnClick = (e) => {
         e.preventDefault();
-        alert(this.state.selectValue);
+
+        let data = {
+            username: this.props.authUser,
+            title: this.props.name,
+            platform: this.state.selectValue,
+            image: this.props.image,
+            
+        }
+
+        fetch('api/add', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
         
     }
     render() {
