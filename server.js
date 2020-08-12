@@ -7,7 +7,7 @@ var mongoose = require('mongoose');
 var db = require('./models/User');
 const bcrypt = require('bcrypt');
 const app = express()
-const port = 3001
+const port = 3001 || process.env.PORT;
 
 var jsonParser = bodyParser.json()
  
