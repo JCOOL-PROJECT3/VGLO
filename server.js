@@ -1,4 +1,4 @@
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/games";
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://joe:ScatPack2020!@ds053838.mlab.com:53838/heroku_pndrw9z9";
 
 const express = require('express')
 var bodyParser = require('body-parser');
@@ -8,6 +8,10 @@ var db = require('./models/User');
 const bcrypt = require('bcrypt');
 const app = express()
 const port = 3001 || process.env.PORT;
+
+if (process.env.NODE_ENV == "production") {
+    app.use(express.static("client/build"));
+}
 
 var jsonParser = bodyParser.json()
  
